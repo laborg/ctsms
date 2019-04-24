@@ -21,8 +21,6 @@ public class DataTableRenderer extends org.primefaces.component.datatable.DataTa
 	// http://stickysession.com/2013/02/extending-primefaces-datatable-to-enable-persistent-filter-values/
 	@Override
 	protected void encodeFilter(FacesContext context, DataTable table, UIColumn column) throws IOException {
-		// TODO Auto-generated method stub
-		super.encodeFilter(context, table, column);
 		Map<String, String> params = context.getExternalContext().getRequestParameterMap();
 		ResponseWriter writer = context.getResponseWriter();
 		ValueExpression filterBy = column.getValueExpression("filterBy");
