@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.component.api.UIColumn;
 import org.primefaces.component.column.Column;
 import org.primefaces.component.datatable.DataTable;
 
@@ -16,10 +17,12 @@ import org.primefaces.component.datatable.DataTable;
  * persistence of the filter values.
  */
 public class DataTableRenderer extends org.primefaces.component.datatable.DataTableRenderer {
-
+	
 	// http://stickysession.com/2013/02/extending-primefaces-datatable-to-enable-persistent-filter-values/
 	@Override
-	protected void encodeFilter(FacesContext context, DataTable table, Column column) throws IOException {
+	protected void encodeFilter(FacesContext context, DataTable table, UIColumn column) throws IOException {
+		// TODO Auto-generated method stub
+		super.encodeFilter(context, table, column);
 		Map<String, String> params = context.getExternalContext().getRequestParameterMap();
 		ResponseWriter writer = context.getResponseWriter();
 		ValueExpression filterBy = column.getValueExpression("filterBy");
