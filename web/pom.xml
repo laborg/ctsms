@@ -11,7 +11,7 @@
 	<packaging>war</packaging>
 	<name>Clinical Trial Site Management System Web</name>
 	<properties>
-		<theme.version>1.0.6</theme.version>
+		<theme.version>1.0.10</theme.version>
 		<jersey.version>1.19</jersey.version>
 	</properties>
 	<dependencies>
@@ -356,12 +356,12 @@
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>1.0.8</version>
+			<version>${theme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>delta</artifactId>
-			<version>1.0.10</version>
+			<version>${theme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
