@@ -113,7 +113,7 @@ public class DataTable extends org.primefaces.component.datatable.DataTable {
 						for (UIComponent subTableKid : subTable.getChildren()) {
 							if (subTableKid.isRendered()
 									&& subTableKid instanceof Column
-									&& ColumnManagementBean.isVisible((Column) kid)) {
+									&& ColumnManagementBean.isVisible((Column) subTableKid)) {
 								columnsCount++;
 							}
 						}
