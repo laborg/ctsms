@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
 import org.hibernate.LockMode;
 import org.phoenixctms.ctsms.domain.File;
@@ -75,6 +76,7 @@ import org.phoenixctms.ctsms.vo.TrialOutVO;
  */
 public class MassMailServiceImpl
 		extends MassMailServiceBase {
+	private static final Logger LOG = Logger.getLogger(MassMailServiceImpl.class);
 	// private final static String VELOCITY_LOG_TAG = "massmail";
 	// private static JournalEntry logSystemMessage(Proband proband, MassMailOutVO massMailVO, Timestamp now, User user, String systemMessageCode, Object result, Object original,
 	// JournalEntryDao journalEntryDao) throws Exception {
@@ -656,8 +658,9 @@ public class MassMailServiceImpl
 							L10nUtil.getString(Locales.NOTIFICATION, MessageCodes.MASS_MAIL_CACNELLED_NO_RECIPIENTS, DefaultMessages.MASS_MAIL_CACNELLED_NO_RECIPIENTS));
 					cancelled = true;
 				}
-			} catch (Throwable t) {
-				recipient.setErrorMessage(t.getMessage());
+			} catch (Exception e) {
+				LOG.warn("Error while sending emails", e);
+				recipient.setErrorMessage(e.getMessage());
 				if (delayMillis > 0) {
 					Thread.currentThread();
 					Thread.sleep(delayMillis);

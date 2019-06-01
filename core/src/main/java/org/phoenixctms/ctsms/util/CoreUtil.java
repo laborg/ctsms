@@ -39,6 +39,7 @@ import javax.imageio.stream.ImageInputStream;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import org.apache.log4j.Logger;
 import org.phoenixctms.ctsms.PrincipalStore;
 import org.phoenixctms.ctsms.UserContext;
 import org.phoenixctms.ctsms.compare.AlphanumStringComparator;
@@ -71,6 +72,7 @@ import com.thoughtworks.xstream.XStream;
 
 public final class CoreUtil {
 
+	private static final Logger LOG = Logger.getLogger(CoreUtil.class);
 	public final static String RANDOM_ALGORITHM = "SHA1PRNG";
 	private final static String JAVASCRIPT_ENGINE_NAME = "JavaScript";
 	public static final String PDF_FILENAME_EXTENSION = "pdf";
@@ -1033,7 +1035,8 @@ public final class CoreUtil {
 		if (auth != null) {
 			try {
 				user = (User) userDao.searchUniqueName(UserDao.TRANSFORM_NONE, auth.getUsername());
-			} catch (Throwable t) {
+			} catch (Exception e) {
+				LOG.warn(e.getMessage(), e);
 			}
 		}
 		getUserContext().setUser(user);

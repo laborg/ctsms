@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.phoenixctms.ctsms.UserContext;
 import org.phoenixctms.ctsms.domain.JournalEntryDao;
 import org.phoenixctms.ctsms.domain.Password;
@@ -40,6 +41,7 @@ public class Authenticator {
 	private JournalEntryDao journalEntryDao;
 	private LdapService ldapService1;
 	private LdapService ldapService2;
+	private static final Logger LOG = Logger.getLogger(Authenticator.class);
 
 	public Authenticator() {
 	}
@@ -53,10 +55,11 @@ public class Authenticator {
 			User user = null;
 			try {
 				user = (User) userDao.searchUniqueName(UserDao.TRANSFORM_NONE, auth.getUsername());
-			} catch (Throwable t) {
-				AuthenticationException e = L10nUtil.initAuthenticationException(AuthenticationExceptionCodes.UNKNOWN_USER, auth.getUsername());
-				e.initCause(t);
-				throw e;
+			} catch (Exception ex) {
+				LOG.error("Error while searching for unique name",ex);
+				AuthenticationException ae = L10nUtil.initAuthenticationException(AuthenticationExceptionCodes.UNKNOWN_USER, auth.getUsername());
+				ae.initCause(ex);
+				throw ae;
 			}
 			UserContext userContext = CoreUtil.getUserContext();
 			userContext.setUser(user);

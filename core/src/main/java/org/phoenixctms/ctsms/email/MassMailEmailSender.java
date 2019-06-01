@@ -15,6 +15,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
 import org.phoenixctms.ctsms.domain.BankAccountDao;
 import org.phoenixctms.ctsms.domain.ContactDetailType;
@@ -110,6 +111,7 @@ public class MassMailEmailSender extends EmailSender<MassMail, MassMailRecipient
 	private final static boolean ECRFS_BLANK = false;
 	private final static Pattern MAIL_USER_DOMAIN_REGEXP = Pattern.compile("@");
 	private static final MethodTransfilter RESOLVE_MAIL_ADDRESS_TRANSFILTER = MethodTransfilter.getEntityMethodTransfilter(true);
+	private static final Logger LOG = Logger.getLogger(MassMailEmailSender.class);
 
 	public static String getBeaconImageHtmlElement(String beacon) {
 		return MessageFormat.format(ServiceUtil.BEACON_IMAGE_HTML_ELEMENT, Settings.getHttpBaseUrl(), CommonUtil.BEACON_PATH, beacon, CommonUtil.GIF_FILENAME_EXTENSION);
@@ -548,7 +550,8 @@ public class MassMailEmailSender extends EmailSender<MassMail, MassMailRecipient
 				User user = null;
 				try {
 					user = (User) userDao.searchUniqueName(UserDao.TRANSFORM_NONE, addressParts[0]);
-				} catch (Throwable t) {
+				} catch (Exception e) {
+					LOG.error("Error searching for unique nam", e);
 				}
 				Locales locale = null;
 				if (user != null) {

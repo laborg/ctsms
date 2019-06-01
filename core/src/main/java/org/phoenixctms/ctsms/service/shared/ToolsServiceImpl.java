@@ -23,6 +23,7 @@ import java.util.TimeZone;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Cache;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
@@ -141,6 +142,8 @@ import org.phoenixctms.ctsms.vo.VariablePeriodVO;
  */
 public class ToolsServiceImpl
 		extends ToolsServiceBase {
+	
+	private static final Logger LOG = Logger.getLogger(ToolsServiceImpl.class);
 
 	private static HashSet<Long> createSendDepartmentStaffCategorySet(NotificationType notificationType) {
 		Collection<StaffCategory> sendDepartmentStaffCategories = notificationType.getSendDepartmentStaffCategories();
@@ -1230,8 +1233,9 @@ public class ToolsServiceImpl
 					} else {
 						dropped = true;
 					}
-				} catch (Throwable t) {
-					recipient.setErrorMessage(t.getMessage());
+				} catch (Exception e) {
+					LOG.warn("Exception while sending",e);
+					recipient.setErrorMessage(e.getMessage());
 					if (delayMillis > 0) {
 						Thread.currentThread();
 						Thread.sleep(delayMillis);
