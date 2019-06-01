@@ -397,11 +397,6 @@ public class KeyValueString extends GraphEnumerator {
 					return "";
 				}
 				return L10nUtil.getRandomizationModeName(locale, ((RandomizationMode) value).name());
-			} else if (valueClass.equals(AuthenticationType.class)) {
-				if (value == null) {
-					return "";
-				}
-				return L10nUtil.getAuthenticationTypeName(locale, ((AuthenticationType) value).name());
 			} else if (AddressTypeVO.class.isAssignableFrom(valueClass)) {
 				if (value == null) {
 					return "";
@@ -672,12 +667,7 @@ public class KeyValueString extends GraphEnumerator {
 					return "";
 				}
 				return L10nUtil.getVisitTypeName(locale, ((VisitTypeVO) value).getNameL10nKey());
-			} else if (VisitTypeVO.class.isAssignableFrom(valueClass)) {
-				if (value == null) {
-					return "";
-				}
-				return L10nUtil.getVisitTypeName(locale, ((VisitTypeVO) value).getNameL10nKey());
-			}
+			} 
 		}
 		return null;
 	}
