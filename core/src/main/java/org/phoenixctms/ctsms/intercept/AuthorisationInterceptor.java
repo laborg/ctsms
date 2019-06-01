@@ -888,7 +888,7 @@ public class AuthorisationInterceptor implements MethodBeforeAdvice {
 				file = parameterValue == null ? null : CheckIDUtil.checkFileId((Long) parameterValue, fileDao);
 				if (file != null && !file.isPublicFile()) {
 					throw L10nUtil.initAuthorisationException(AuthorisationExceptionCodes.PARAMETER_RESTRICTION_VIOLATED, permission.getServiceMethod(),
-							permission.getParameterGetter(), file == null ? null : Long.toString(file.getId()));
+							permission.getParameterGetter(), Long.toString(file.getId()));
 				}
 				break;
 			default:

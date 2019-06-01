@@ -1022,7 +1022,7 @@ public class InventoryServiceImpl
 			CheckIDUtil.checkInventoryId(inventoryId, this.getInventoryDao());
 		}
 		if (onBehalfOfId != null && this.getStaffDao().load(onBehalfOfId) == null) {
-			throw L10nUtil.initServiceException(ServiceExceptionCodes.INVENTORY_BOOKING_INVALID_BEHALF_OF_STAFF_ID, onBehalfOfId == null ? null : onBehalfOfId.toString());
+			throw L10nUtil.initServiceException(ServiceExceptionCodes.INVENTORY_BOOKING_INVALID_BEHALF_OF_STAFF_ID, onBehalfOfId.toString());
 		}
 		if (probandId != null) {
 			CheckIDUtil.checkProbandId(probandId, this.getProbandDao());

@@ -2837,7 +2837,7 @@ public class TrialServiceImpl
 			}
 		}
 		logSystemMessage(trial, trialDao.toTrialOutVO(trial), now, user, shuffleInfo,
-				shuffleInfo != null ? SystemMessageCodes.PROBAND_LIST_ENTRIES_SHUFFLED_AND_CREATED : SystemMessageCodes.PROBAND_LIST_ENTRIES_CREATED);
+				SystemMessageCodes.PROBAND_LIST_ENTRIES_SHUFFLED_AND_CREATED);
 		return result;
 	}
 
@@ -3662,7 +3662,7 @@ public class TrialServiceImpl
 			}
 		}
 		logSystemMessage(trial, trialDao.toTrialOutVO(trial), now, user, shuffleInfo,
-				shuffleInfo != null ? SystemMessageCodes.PROBAND_LIST_ENTRIES_SHUFFLED_AND_DELETED : SystemMessageCodes.PROBAND_LIST_ENTRIES_DELETED);
+				SystemMessageCodes.PROBAND_LIST_ENTRIES_SHUFFLED_AND_DELETED);
 		return result;
 	}
 
