@@ -650,7 +650,6 @@ public class MassMailServiceImpl
 				if (toCount > 0) {
 					sent = true;
 					if (delayMillis > 0) {
-						Thread.currentThread();
 						Thread.sleep(delayMillis);
 					}
 				} else {
@@ -662,7 +661,6 @@ public class MassMailServiceImpl
 				LOG.warn("Error while sending emails", e);
 				recipient.setErrorMessage(e.getMessage());
 				if (delayMillis > 0) {
-					Thread.currentThread();
 					Thread.sleep(delayMillis);
 				}
 			}

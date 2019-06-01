@@ -1227,7 +1227,6 @@ public class ToolsServiceImpl
 					if (toCount > 0) {
 						sent = true;
 						if (delayMillis > 0) {
-							Thread.currentThread();
 							Thread.sleep(delayMillis);
 						}
 					} else {
@@ -1237,7 +1236,6 @@ public class ToolsServiceImpl
 					LOG.warn("Exception while sending",e);
 					recipient.setErrorMessage(e.getMessage());
 					if (delayMillis > 0) {
-						Thread.currentThread();
 						Thread.sleep(delayMillis);
 					}
 				}
